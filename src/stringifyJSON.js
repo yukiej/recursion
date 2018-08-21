@@ -16,7 +16,23 @@ var stringifyJSON = function(obj) {
   	return String(obj);
   };
 
-  
+  //if the object is a special value, return that special value stringified
+  if ([null, false, true].includes(obj)){
+  	return String(obj);
+  };
 
-  //
-};
+  //if the object is an array, return the stuff inside, stringified, wrapped in (stringified) brackers
+  if (_.isArray(obj)){
+  	//Check for empty array
+  	if (obj.length === 0){
+  		return "[]";
+  	} else{
+  		var results = stringifyJSON(obj[0]);
+  		var index = obj.length;
+  		for (var i = 1; i < index; i++){
+  			results = results + "," + stringifyJSON(obj[i]);
+  		}
+  		return "[" + results + "]"; 
+  	};
+  }
+}
