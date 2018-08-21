@@ -32,7 +32,25 @@ var stringifyJSON = function(obj) {
   		for (var i = 1; i < index; i++){
   			results = results + "," + stringifyJSON(obj[i]);
   		}
-  		return "[" + results + "]"; 
+  		results = "[" + results + "]";
+  		return results; 
   	};
-  }
+  };
+
+  //if the object is a non-array object
+  if (_.isObject(obj)){
+  	//Check for empty object
+  	if (jQuery.isEmptyObject(obj)){
+  		return "{}";
+  	} else {
+  		var keys = Object.keys(obj);
+  		var firstProperty = '"' + keys[0] + '":'+ stringifyJSON(obj[keys[0]]);
+  		var results = firstProperty;
+  		for (var i = 1; i < keys.length; i++){
+  			results = results + ',"' + keys[i] + '":'+stringifyJSON(obj[keys[i]]);
+  		}
+  		results = "{" + results + "}";
+  		return results;
+  	}
+  };
 }
