@@ -8,22 +8,22 @@ var stringifyJSON = function(obj) {
   if (_.isUndefined(obj) || _.isFunction(obj)){
   	return;
   }
-  //base case: if the object is a string, return it wrapped in quotes
+  //if the object is a string, return it wrapped in quotes
   if (_.isString(obj)){
   	//return the string wrapped in quotes
   	return ('"' + obj + '"');
-  };
+  }
 
   //if the object is a number, turn it into a string and return it
   if (_.isNumber(obj)){
   	//return the number turned into a string (no extra quotes tho)
   	return String(obj);
-  };
+  }
 
   //if the object is a special value, return that special value stringified
   if ([null, false, true].includes(obj)){
   	return String(obj);
-  };
+  }
 
   //if the object is an array, return the stuff inside, stringified, wrapped in (stringified) brackers
   if (_.isArray(obj)){
@@ -38,13 +38,13 @@ var stringifyJSON = function(obj) {
   		}
   		results = "[" + results + "]";
   		return results; 
-  	};
-  };
+  	}
+  }
 
   //if the object is a date
   if (_.isDate(obj)){
   	return stringifyJSON(obj.toISOString());
-  };
+  }
 
   //if the object is a non-array object
   if (_.isObject(obj)){

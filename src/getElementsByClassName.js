@@ -16,16 +16,17 @@ var getElementsByClassNameHelper = function(className, node) {
   //use element.classList to get the DOMTokenList collection of the class attributes of the element, which should be added to results.
   //do steps 2 and 3 recursively until there are no child nodes
   
-  	var childNodes = node.childNodes;
-  	if (node.classList !== undefined && node.classList.contains(className)){
-  		results.push(node);	
-  	}
-  	if (childNodes !== undefined){
-	  	for (var index = 0; index < childNodes.length; index++){
-	  		var $child = childNodes[index];
-	  		results = results.concat(getElementsByClassNameHelper(className,$child));
-	  	}
+  var childNodes = node.childNodes;
+  if (node.classList !== undefined && node.classList.contains(className)){
+  	results.push(node);	
+  }
+
+  if (childNodes !== undefined){
+	  for (var index = 0; index < childNodes.length; index++){
+	  	var $child = childNodes[index];
+	  	results = results.concat(getElementsByClassNameHelper(className,$child));
+	  }
 	}
-  	return results;
+  return results;
 }
   
